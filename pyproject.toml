@@ -2,7 +2,7 @@
 name = "openrouter-examples-python"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["OpenRouter <support@openrouter.ai>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
