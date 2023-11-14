@@ -27,7 +27,7 @@ print(completion.choices[0].message.content)
 # Streaming:
 print("----- streaming request -----")
 stream = client.chat.completions.create(
-    extra_headers={"HTTP-Referer": "https://openrouter.ai"},
+    extra_headers={"HTTP-Referer": getenv("APP_URL"), "X-Title": getenv("APP_TITLE")},
     model="gpt-4",
     messages=[
         {

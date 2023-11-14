@@ -1,7 +1,8 @@
 from litellm import completion
-import litellm
-litellm.set_verbose=True
-import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 OPENROUTER_ENDPOINTS = {
     "gpt-3.5-turbo": "openrouter/openai/gpt-3.5-turbo",

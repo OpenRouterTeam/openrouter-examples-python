@@ -3,6 +3,10 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 template = """Question: {question}
 
 Answer: Let's think step by step."""
