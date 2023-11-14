@@ -4,7 +4,7 @@ from os import getenv
 
 load_dotenv()
 
-# gets API Key from environment variable OPENAI_API_KEY
+# gets API Key from environment variables
 client = OpenAI(
     base_url=getenv("OPENROUTER_BASE_URL"),
     api_key=getenv("OPENROUTER_API_KEY"),
