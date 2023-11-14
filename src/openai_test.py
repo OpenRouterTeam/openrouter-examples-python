@@ -1,5 +1,3 @@
-#!/usr/bin/env -S poetry run python
-
 from openai import OpenAI
 from dotenv import load_dotenv
 from os import getenv
