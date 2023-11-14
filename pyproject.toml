@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "openrouter-examples-python"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.0.335"
+litellm = "^0.14.1"
+openai = "^1.2.4"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
