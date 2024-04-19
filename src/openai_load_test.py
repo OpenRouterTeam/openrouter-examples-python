@@ -11,7 +11,9 @@ client = AsyncOpenAI(
     api_key=getenv("OPENROUTER_API_KEY"),
 )
 
-model = "google/gemma-7b-it"
+# model = "google/gemma-7b-it"
+# model = "nousresearch/nous-capybara-34b"
+model = "microsoft/wizardlm-2-7b"
 # model = "meta-llama/llama-2-13b-chat"
 # model = "openai/gpt-3.5-turbo"
 
@@ -25,27 +27,31 @@ async def get_completion(request_identifier):
             "X-Title": getenv("APP_TITLE"),
         },
         model=model,
-        max_tokens=100,
+        max_tokens=400,
         # extra_body=dict(provider=dict(order=["Lepton"])),
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful assistant. You do what you're told and nothing else. You are not a chatbot. You like cookies and fish. You do what you're told and nothing else. You are not a chatbot. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else.",
+                "content": "You are a helpful assistant. You do what you're told and nothing else. You are not a chatbot. You like cookies and fish. You do what you're told and nothing else. You are not a chatbot. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else. You like cookies and fish. You do what you're told and nothing else."
+                * 30,
             },
             {
                 "role": "user",
-                "content": f'Echo back the following 30 times: "{request_identifier}"',
+                "content": f'Echo back the following 100 times: "{request_identifier}"',
             },
         ],
     )
-    print(completion.choices[0].message.content)
+    if completion.choices:
+        print(completion.choices[0].message.content)
+    else:
+        print("No completions found")
 
 
 async def main():
-    for i in range(4):
-        request_identifiers = range(100)
-        tasks = [get_completion(identifier) for identifier in request_identifiers]
-        await asyncio.gather(*tasks)
+    # for i in range(4):
+    request_identifiers = range(10)
+    tasks = [get_completion(identifier) for identifier in request_identifiers]
+    await asyncio.gather(*tasks, return_exceptions=True)
 
 
 # Run the async main function
