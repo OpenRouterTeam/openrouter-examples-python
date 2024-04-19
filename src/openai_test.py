@@ -10,6 +10,8 @@ client = OpenAI(
     api_key=getenv("OPENROUTER_API_KEY"),
 )
 
+model = "openai/gpt-3.5-turbo"
+
 # Non-streaming:
 print("----- standard request -----")
 completion = client.chat.completions.create(
@@ -17,7 +19,7 @@ completion = client.chat.completions.create(
         "HTTP-Referer": getenv("APP_URL"),
         "X-Title": getenv("APP_TITLE"),
     },
-    model="gpt-4",
+    model=model,
     messages=[
         {
             "role": "user",
@@ -34,7 +36,7 @@ stream = client.chat.completions.create(
         "HTTP-Referer": getenv("APP_URL"),
         "X-Title": getenv("APP_TITLE"),
     },
-    model="gpt-4",
+    model=model,
     messages=[
         {
             "role": "user",

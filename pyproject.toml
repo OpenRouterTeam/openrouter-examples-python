@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.10"
 langchain = "^0.0.335"
 litellm = "^0.14.1"
-openai = "^1.2.4"
+openai = "^1.21.0"
 python-dotenv = "^1.0.0"
 
 
