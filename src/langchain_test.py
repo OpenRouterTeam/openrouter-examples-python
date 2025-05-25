@@ -1,30 +1,17 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from os import getenv
-from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
 
-load_dotenv()
-
-template = """Question: {question}
-
-Answer: Let's think step by step."""
-
-prompt = PromptTemplate(template=template, input_variables=["question"])
-
-llm = ChatOpenAI(
-    openai_api_key=getenv("OPENROUTER_API_KEY"),
-    openai_api_base=getenv("OPENROUTER_BASE_URL"),
-    model_kwargs={
-        "headers": {
-            "HTTP-Referer": getenv("APP_URL"),
-            "X-Title": getenv("APP_TITLE"),
-        }
-    },
+template = ChatPromptTemplate.from_messages(
+    [
+        ("user", "{question}"),
+        ("assistant", "Let's think step by step."),
+    ]
 )
 
-llm_chain = LLMChain(prompt=prompt, llm=llm)
+llm = ChatOpenAI(model="openai/gpt-4.1-mini")
+
+llm_chain = template | llm
 
 question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
 
-print(llm_chain.run(question))
+print(llm_chain.invoke({"question": question}))
